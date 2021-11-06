@@ -1,0 +1,45 @@
+import random
+score=0
+hint='нет'
+print("""
+           Здравствуйте и добро пожаловать в игру Химические анаграммы!
+                  Ваша задача: отгадать слово по буквам
+                  (Нажмите клавишу ввода, чтобы выйти.) """)
+maxscore=int(input('Введите максимальное количество очков которое вы хотите получить в итоге: '))
+while score<maxscore:
+    WORDS = ("Кислород", "Водород","Аргон","Менделеев","Моль","Сон","Пробирка")
+    word = random.choice(WORDS)
+    correct = word
+    jumble =""
+    while word:
+        position = random.randrange(len(word))
+        jumble += word[position]
+        word = word[:position] + word[(position + 1):]
+    print("Анаграмма: ", jumble)
+    word_pad=""
+    if word_pad != correct:
+        word_pad = input("Ваши догадки: ")
+        if word_pad!=correct:
+            print("Извините, не верно.")
+            hint = input("Нужна подсказка?(да/нет)")
+        if hint == "да":
+            score=score-5
+            if correct=="Кислород":
+                print("Газ,входящий в состав воздуха, его там 21%")
+            elif correct=="Водород":
+                print("на этом газе летали первые воздушные шары")
+            elif correct=="Аргон":
+                print("сварочный газ")
+            elif correct=="Менделеев":
+                print("Создатель Периодической таблицы")
+            elif correct=="Моль":
+                print("не только насекомое, но и единица измерения")
+            elif correct=="Сон":
+                print(" помощник Менделеева")
+            elif correct=="Пробирка":
+                print("стеклянный сосуд для опытов")
+    if word_pad == correct:
+        print("Всё верно, Вы угадали!\n")
+        score+=15
+print("Поздравляем с завершением игры!\nПолучено очков "+str(score)+".\nСпасибо за игру.")
+input("\n\nНажмите любую клавишу для выхода из игры .")
